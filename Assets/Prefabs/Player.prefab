@@ -186,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25d5210dfe7522a49bd3af7db2cbb02e, type: 2}
+  - {fileID: 2100000, guid: 474758f1134e1ee4599c30ab6baa78da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,13 +266,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8080874176370709752}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72fecb2b3ba1e6641a727305bb037593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterHalo: {fileID: 8080874176536542529}
-  consumptionRate: 0.01
+  consumptionRate: 0.1
   maxLightRange: 3
   emisionMaterial: {fileID: 2100000, guid: 25d5210dfe7522a49bd3af7db2cbb02e, type: 2}
   emissionIntensity: 0
@@ -505,7 +505,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25d5210dfe7522a49bd3af7db2cbb02e, type: 2}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -588,7 +588,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25d5210dfe7522a49bd3af7db2cbb02e, type: 2}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
