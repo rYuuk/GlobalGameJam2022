@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControlelr : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     [Header("Basic Movement")]
     [SerializeField] private float speed;
