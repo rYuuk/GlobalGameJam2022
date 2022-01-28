@@ -1,45 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
     [Header("Basic Movement")]
     [SerializeField] private float speed;
+    [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float gravitySpeed = -9.8f;
     [SerializeField] private LayerMask ground;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody rigidbody;
-    private bool isGrounded;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private bool isGrounded;
+    private bool facingRight = true;
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        float h = Input.GetAxis("Horizontal");
         GroundCheck();
         Gravity();
-        Movement();
+        Movement(h);
         Jump();
+        Flip(h);
     }
 
-    private void Movement()
+    private void Movement(float h)
     {
-        float h = Input.GetAxis("Horizontal");
-        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            transform.Translate(Vector3.right * (h * speed * 2 * Time.deltaTime));
+            rigidbody.velocity = new Vector3(h * speed * 1.5f, rigidbody.velocity.y, 0f);    
         }
         else
         {
-            transform.Translate(Vector3.right * (h * speed * Time.deltaTime));
+            rigidbody.velocity = new Vector3(h * speed, rigidbody.velocity.y, 0f);
         }
+        
+    }
+
+    private void Flip(float h)
+    {
+        if (h>0)
+        {
+            transform.DORotate(Vector3.zero,rotationSpeed);
+            facingRight = true;
+        }
+        else if (h<0)
+        {
+            transform.DORotate(new Vector3(0,180,0),rotationSpeed);
+            facingRight = false;
+        }
+        
     }
 
     private void Jump()
@@ -52,7 +66,7 @@ public class CharacterController : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.2f, ground);
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.3f, ground);
     }
 
     private void Gravity()
