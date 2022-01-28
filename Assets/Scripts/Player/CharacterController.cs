@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    [Header("Basic Movement")]
-    [SerializeField] private float speed;
+    [Header("Basic Movement")] [SerializeField]
+    private float speed;
+
     [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float gravitySpeed = -9.8f;
@@ -30,30 +28,28 @@ public class CharacterController : MonoBehaviour
 
     private void Movement(float h)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
         {
-            rigidbody.velocity = new Vector3(h * speed * 1.5f, rigidbody.velocity.y, 0f);    
+            rigidbody.velocity = new Vector3(h * speed * 1.5f, rigidbody.velocity.y, 0f);
         }
         else
         {
             rigidbody.velocity = new Vector3(h * speed, rigidbody.velocity.y, 0f);
         }
-        
     }
 
     private void Flip(float h)
     {
-        if (h>0)
+        if (h > 0)
         {
-            transform.DORotate(Vector3.zero,rotationSpeed);
+            transform.DORotate(Vector3.zero, rotationSpeed);
             facingRight = true;
         }
-        else if (h<0)
+        else if (h < 0)
         {
-            transform.DORotate(new Vector3(0,180,0),rotationSpeed);
+            transform.DORotate(new Vector3(0, 180, 0), rotationSpeed);
             facingRight = false;
         }
-        
     }
 
     private void Jump()
