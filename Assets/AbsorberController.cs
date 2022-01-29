@@ -15,9 +15,4 @@ public class AbsorberController : MonoBehaviour
     {
         playerLight.consumptionRate += consumptionAffector;
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        playerLight.consumptionRate = playerLight.startConsumptionRate;
-    }
 }
