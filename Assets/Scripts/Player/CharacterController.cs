@@ -101,9 +101,15 @@ public class CharacterController : MonoBehaviour
         if ((Input.GetButton("Jump") && isGrounded))
         {
             playerAnimator.SetTrigger("jump");
-            rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            CancelInvoke(nameof(ActualJump));
+            Invoke(nameof(ActualJump),0.2f);
         }
         
+    }
+
+    private void ActualJump()
+    {
+        rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
     }
 
     private void GroundCheck()
