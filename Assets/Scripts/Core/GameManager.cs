@@ -1,10 +1,15 @@
 using System;
+using DefaultNamespace;
 using UnityEngine;
 using VContainer;
 
 public class GameManager : MonoBehaviour
 {
     [Inject] private CheckpointData checkpointData;
+    [Inject] private Checkpoint[] checkpoints;
+    [Inject] private PlayerLight playerLight;
+    [Inject] private IResetable[] resetableComponents;
+
     public enum State
     {
         Running,
@@ -18,6 +23,10 @@ public class GameManager : MonoBehaviour
 
     public State state;
 
+    public void Continue()
+    {
+        MovePlayerToLastCheckpoint();
+    }
 
     public void StartGame()
     {
@@ -36,11 +45,41 @@ public class GameManager : MonoBehaviour
         checkpointData.lastCheckpointID = id;
     }
 
+    private void OnEnable()
+    {
+        playerLight.LightConsumed += OnLightConsumed;
+    }
+
+    private void OnDisable()
+    {
+        playerLight.LightConsumed -= OnLightConsumed;
+    }
+
+    private void OnLightConsumed()
+    {
+        MovePlayerToLastCheckpoint();
+
+        foreach (var component in resetableComponents)
+        {
+            component.ResetState();
+        }
+    }
+
+    private void MovePlayerToLastCheckpoint()
+    {
+        var checkpoint = checkpoints[checkpointData.lastCheckpointID];
+        playerLight.transform.position = (checkpoint.SpawnPosition);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
+        }
+
+        if (playerLight.CurrentLightUnits == 0)
+        {
         }
     }
 
