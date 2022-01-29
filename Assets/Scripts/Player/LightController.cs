@@ -4,11 +4,9 @@ public class LightController : MonoBehaviour
 {
     public Light characterHalo;
 
+    public float startConsumptionRate = 0.01f;
     public float consumptionRate = 0.01f;
     public float maxLightRange = 3f;
-    public Material emisionMaterial;
-    public float emissionIntensity;
-    public float maxEmission;
 
     // Update is called once per frame
     void Update()
