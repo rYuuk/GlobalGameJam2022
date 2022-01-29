@@ -17,7 +17,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private float defaultGravitySpeed = -9.8f;
     [SerializeField] private LayerMask ground;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody rigidbody;

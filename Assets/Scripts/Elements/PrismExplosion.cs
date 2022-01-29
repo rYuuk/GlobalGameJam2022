@@ -12,12 +12,13 @@ public class PrismExplosion : MonoBehaviour
 
     private bool isTriggered;
     
-    private Collider collider;
-    
+    private Collider col;
+    private static readonly int Explode = Animator.StringToHash("Explode");
+
     private void Awake()
     {
-        collider = GetComponent<SphereCollider>();
-        collider.isTrigger = true;
+        col = GetComponent<SphereCollider>();
+        col.isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +26,7 @@ public class PrismExplosion : MonoBehaviour
         if (!isTriggered)
         {
             explosion.Play();
-            animator.SetTrigger("Explode");
+            animator.SetTrigger(Explode);
             gameManager.Finish();
         }
 
