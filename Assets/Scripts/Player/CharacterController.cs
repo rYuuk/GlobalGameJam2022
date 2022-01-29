@@ -33,6 +33,7 @@ public class CharacterController : MonoBehaviour
     private float dashTime;
     private int direction;
     private bool isDashEnabled;
+    
 
     private void Start()
     {
@@ -150,6 +151,11 @@ public class CharacterController : MonoBehaviour
     private void OnTriggerExit(Collider _)
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        throw new NotImplementedException();
     }
 
     private void Death()
