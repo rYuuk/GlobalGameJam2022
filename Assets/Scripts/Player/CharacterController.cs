@@ -1,11 +1,18 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    [Header("Basic Movement")] [SerializeField]
-    private float speed;
-
+    public enum PlayerStates
+    {
+        Walking,
+        Dashing
+    }
+    
+    [Header("Basic Movement")] 
+    
+    [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float gravitySpeed = -9.8f;
@@ -13,17 +20,42 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private bool isGrounded;
+    public PlayerStates playerState;
     private bool facingRight = true;
+
+    [Header("Dash")] 
+    
+    public float dashSpeed;
+    public float startDashTime;
+    private float dashTime;
+    private int direction;
+    private bool isDashEnabled;
+
+    private void Start()
+    {
+        playerState = PlayerStates.Walking;
+        dashTime = startDashTime;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
-        GroundCheck();
-        Gravity();
-        Movement(h);
-        Jump();
-        Flip(h);
+        switch (playerState)
+        {
+            case PlayerStates.Walking:
+                GroundCheck();
+                Gravity();
+                Movement(h);
+                Jump();
+                Flip(h);                
+                break;
+            case PlayerStates.Dashing:
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.useGravity = false;
+                break;
+                
+        }
     }
 
     private void Movement(float h)
@@ -67,11 +99,18 @@ public class CharacterController : MonoBehaviour
 
     private void Gravity()
     {
+        if (!rigidbody.useGravity)
+        {
+            rigidbody.useGravity = true;
+        }
         rigidbody.AddForce(Vector3.up * gravitySpeed);
     }
 
-    private void Dash()
+    private void Dash(float h)
     {
-        
+        if (isDashEnabled)
+        {
+            
+        }
     }
 }
