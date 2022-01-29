@@ -5,6 +5,7 @@ public class LightAffector : MonoBehaviour
 {
     [SerializeField] private float affectRate = 0.05f;
     [Range(0, 3)] [SerializeField] private float capacity = 3;
+    [SerializeField] private bool infiniteCapacity;
 
     [Inject] private PlayerLight playerLight;
 
@@ -20,7 +21,7 @@ public class LightAffector : MonoBehaviour
     {
         if (active)
         {
-            if (capacityReached > capacity)
+            if (capacityReached > capacity && !infiniteCapacity)
             {
                 ResetConsumption();
             }
