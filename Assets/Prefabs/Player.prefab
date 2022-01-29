@@ -252,15 +252,17 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 0.25
   jumpSpeed: 5
-  gravitySpeed: -9.8
+  defaultGravitySpeed: -9.8
   ground:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 8080874176473527939}
   rigidbody: {fileID: 8080874176370709751}
   isGrounded: 0
+  playerState: 0
+  gravity: -9.8
+  waveGravity: -0.75
   dashSpeed: 50
-  dashTime: 0
   startDashTime: 0.1
 --- !u!114 &8080874176370709753
 MonoBehaviour:
@@ -275,11 +277,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHalo: {fileID: 8080874176536542529}
+  startConsumptionRate: 0.01
   consumptionRate: 0.1
   maxLightRange: 3
-  emisionMaterial: {fileID: 2100000, guid: 25d5210dfe7522a49bd3af7db2cbb02e, type: 2}
-  emissionIntensity: 0
-  maxEmission: 2
 --- !u!1 &8080874176473527938
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8080874176473527938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.041, y: -0.321, z: 0}
+  m_LocalPosition: {x: 0.041, y: -0.236, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -402,7 +402,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: NaN, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

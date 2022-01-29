@@ -7,6 +7,7 @@ public class CharacterController : MonoBehaviour
     public enum PlayerStates
     {
         Walking,
+        Reflecting,
         Dashing,
         Wave
     }
@@ -53,7 +54,7 @@ public class CharacterController : MonoBehaviour
                 Jump();
                 Flip(h);                
                 break;
-            case PlayerStates.Dashing:
+            case PlayerStates.Reflecting:
                 rigidbody.velocity = Vector3.zero;
                 rigidbody.useGravity = false;
                 break;
