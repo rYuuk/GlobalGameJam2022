@@ -235,7 +235,8 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 2466354298153873390}
 --- !u!4 &110191410
 Transform:
   m_ObjectHideFlags: 0
@@ -4120,3 +4121,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d736bf8afa3fae48884a9d7bb135e7c, type: 3}
+--- !u!1 &2466354298153873390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2466354297975804902, guid: 7d736bf8afa3fae48884a9d7bb135e7c, type: 3}
+  m_PrefabInstance: {fileID: 2466354298153873389}
+  m_PrefabAsset: {fileID: 0}
