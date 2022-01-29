@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using VContainer;
 
 public class CharacterController : MonoBehaviour
 {
@@ -34,8 +35,8 @@ public class CharacterController : MonoBehaviour
     private int direction;
     private bool isDashEnabled;
 
-    [Header("Animation")] [SerializeField] private Animator playerAnimator;
-    
+    [Header("Animation")] 
+    [SerializeField] private Animator playerAnimator;
 
     private void Start()
     {
@@ -95,7 +96,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    private void Jump() //Called from Animation Event 
     {
         
         rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
@@ -162,6 +163,6 @@ public class CharacterController : MonoBehaviour
 
     private void Death()
     {
-        
+        playerAnimator.SetTrigger("Death");
     }
 }

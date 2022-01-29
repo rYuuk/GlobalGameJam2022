@@ -19,6 +19,7 @@ public class PlayerLight : MonoBehaviour, IResetable
     
     private float consumptionRate;
     private bool isLightConsumed;
+    private CharacterController player;
 
 
     private void Awake()
