@@ -24,7 +24,7 @@ public class PlayerLight : MonoBehaviour, IResetable
     private void Awake()
     {
         ResetConsumptionRate();
-        volumeProfile = Camera.main.GetComponent<Volume>()?.profile;
+        volumeProfile = FindObjectOfType<Volume>()?.profile;
         if (!volumeProfile.TryGet(out cameraVignette)) throw new NullReferenceException(nameof(cameraVignette));
     }
 

@@ -33,6 +33,8 @@ public class CharacterController : MonoBehaviour
     private float dashTime;
     private int direction;
     private bool isDashEnabled;
+
+    [Header("Animation")] [SerializeField] private Animator playerAnimator;
     
 
     private void Start()
@@ -46,7 +48,7 @@ public class CharacterController : MonoBehaviour
     {
         GroundCheck();
         float h = Input.GetAxis("Horizontal");
-        
+        playerAnimator.SetFloat("speed",h);
         switch (playerState)
         {
             case PlayerStates.Walking:
