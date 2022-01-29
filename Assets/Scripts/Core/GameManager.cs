@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public Action Paused;
     public Action Finished;
 
-    
     public State state;
 
 

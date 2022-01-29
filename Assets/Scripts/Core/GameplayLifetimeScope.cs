@@ -10,5 +10,6 @@ public class GameplayLifetimeScope : LifetimeScope
     {
         builder.RegisterInstance(FindObjectOfType<GameManager>());
         builder.RegisterInstance(checkpointData);
+        builder.RegisterInstance(FindObjectOfType<PlayerLight>());
     }
 }
