@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class DashPointController : MonoBehaviour
+public class ReflectionPointController : MonoBehaviour
 {
     [SerializeField] private Transform[] attachPoint;
     [SerializeField] private bool isHoldingPlayer;
@@ -40,6 +40,7 @@ public class DashPointController : MonoBehaviour
                 holdingTime = startHoldingTime;
                 positionIndex++;
                 player.transform.DOMove(attachPoint[positionIndex].position, 0.3f);
+                player.transform.DOLookAt(attachPoint[positionIndex].position,0.15f);
             }
         }
     }
