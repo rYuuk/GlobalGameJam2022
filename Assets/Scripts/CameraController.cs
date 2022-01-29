@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +7,14 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float speed;
+
+    private void Awake()
+    {
+        if (target==null)
+        {
+            target = FindObjectOfType<CharacterController>().transform;
+        }
+    }
 
     private void Update()
     {
