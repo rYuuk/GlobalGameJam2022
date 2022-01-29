@@ -144,7 +144,7 @@ MonoBehaviour:
   gravity: -9.8
   waveGravity: -0.75
   dashValue: 0
-  startDashTime: 0.1
+  waveMaterial: {fileID: 2100000, guid: 18c9030633fe27d4a9c9189aa45a8417, type: 2}
   playerAnimator: {fileID: 8766521073205557539}
 --- !u!114 &8080874176370709753
 MonoBehaviour:
@@ -417,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 2008707356002381197, guid: 1c7f713490b418047943251abb6691bb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cba5d1253fc3736488554d40f5e29dc6, type: 2}
+      objectReference: {fileID: 2100000, guid: 18c9030633fe27d4a9c9189aa45a8417, type: 2}
     - target: {fileID: 2954265881230961377, guid: 1c7f713490b418047943251abb6691bb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

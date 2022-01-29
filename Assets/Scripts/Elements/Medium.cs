@@ -1,33 +1,27 @@
 using UnityEngine;
-public class MediumController : MonoBehaviour
+
+public class Medium : MonoBehaviour
 {
-    [SerializeField] private bool isPlayerInside;
     [SerializeField] Transform dashTarget;
+
     private Vector3 Target;
     private float holdingTime;
     private CharacterController player;
+
 
     private void Start()
     {
         player = FindObjectOfType<CharacterController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        isPlayerInside = true;
         player.playerState = CharacterController.PlayerStates.Wave;
+        player.dashTarget = dashTarget;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isPlayerInside = false;
+        player.dashTarget = null;
     }
-    
-    
 }

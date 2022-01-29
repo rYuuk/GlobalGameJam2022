@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,10 +12,10 @@ public class CharacterController : MonoBehaviour
         Wave,
         Dead
     }
-    
-    [Header("Basic Movement")] 
-    
-    [SerializeField] private float speed;
+
+    [Header("Basic Movement")] [SerializeField]
+    private float speed;
+
     [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private LayerMask ground;
@@ -28,16 +27,15 @@ public class CharacterController : MonoBehaviour
     public float waveGravity;
     private bool facingRight = true;
 
-    [Header("Dash")] 
-    
-    public float dashValue;
-    public float startDashTime;
-    private float dashTime;
+    [Header("Dash")] [SerializeField] private float dashValue;
+    [SerializeField] private Material waveMaterial;
+
+    public Transform dashTarget;
+
     private int direction;
     private bool isDashEnabled;
 
-    [Header("Animation")] 
-    [SerializeField] private Animator playerAnimator;
+    [Header("Animation")] [SerializeField] private Animator playerAnimator;
 
     private PlayerLight playerLight;
 
@@ -45,13 +43,13 @@ public class CharacterController : MonoBehaviour
     {
         playerLight = GetComponent<PlayerLight>();
         playerState = PlayerStates.Walking;
-        dashTime = startDashTime;
     }
 
     private void OnEnable()
     {
         playerLight.LightConsumed += Death;
     }
+
     private void OnDisable()
     {
         playerLight.LightConsumed -= Death;
@@ -62,14 +60,15 @@ public class CharacterController : MonoBehaviour
     {
         GroundCheck();
         float h = Input.GetAxis("Horizontal");
-        playerAnimator.SetFloat("speed",h);
+        playerAnimator.SetFloat("speed", h);
         switch (playerState)
         {
             case PlayerStates.Walking:
+                waveMaterial.SetFloat("_WaveIntensity", 0.2f);
                 Gravity();
                 Movement(h);
-                Jump();                
-                Flip(h);                
+                Jump();
+                Flip(h);
                 break;
             case PlayerStates.Reflecting:
                 rigidbody.velocity = Vector3.zero;
@@ -81,7 +80,8 @@ public class CharacterController : MonoBehaviour
                 Dash();
                 break;
             case PlayerStates.Dead:
-                break;;
+                break;
+                ;
         }
     }
 
@@ -117,9 +117,8 @@ public class CharacterController : MonoBehaviour
         {
             playerAnimator.SetTrigger("jump");
             CancelInvoke(nameof(ActualJump));
-            Invoke(nameof(ActualJump),0.2f);
+            Invoke(nameof(ActualJump), 0.2f);
         }
-        
     }
 
     private void ActualJump()
@@ -130,7 +129,7 @@ public class CharacterController : MonoBehaviour
     private void GroundCheck()
     {
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.3f, ground);
-        playerAnimator.SetBool("isGrounded",isGrounded);
+        playerAnimator.SetBool("isGrounded", isGrounded);
     }
 
     private void Gravity()
@@ -139,6 +138,7 @@ public class CharacterController : MonoBehaviour
         {
             rigidbody.useGravity = true;
         }
+
         rigidbody.AddForce(Vector3.up * gravity);
     }
 
@@ -151,38 +151,18 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            if (facingRight)
-            {
-                Vector3 dashTarget = new Vector3(transform.position.x + dashValue, transform.position.y);
-                transform.DOMove(dashTarget,0.5f);
-            }
-            else
-            {
-                Vector3 dashTarget = new Vector3(transform.position.x - dashValue, transform.position.y);
-                transform.DOMove(dashTarget,0.5f);  
-            }    
+            var dashVector = new Vector3(dashTarget.position.x + ((facingRight ? 1 : -1) * dashValue),
+                dashTarget.position.y);
+            transform.DOMove(dashVector, 0.5f);
+            waveMaterial.SetFloat("_WaveIntensity", 0.5f);
             isDashEnabled = false;
             playerState = PlayerStates.Walking;
         }
     }
 
-    public void setDashDirection(Vector3 dashTarget)
-    {
-        
-    }
     private void OnCollisionEnter(Collision _)
     {
         playerState = PlayerStates.Walking;
-    }
-
-    private void OnTriggerExit(Collider _)
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-       
     }
 
     private void Death()
