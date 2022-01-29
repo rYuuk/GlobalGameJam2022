@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -12,15 +13,16 @@ public class GameManager : MonoBehaviour
         Finish
     }
 
+    public State state;
+
     public void StartGame()
     {
-        
+        state = State.Game;
     }
 
     public void Finish()
     {
-        
+        state = State.Finish;
     }
-    
-    
+
 }

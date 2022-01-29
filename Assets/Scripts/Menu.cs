@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +11,9 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button creditButton;
     [SerializeField] private Button quitButton;
 
-    [SerializeField] private Button backButton;
+    [Header("Pause")] [SerializeField] private Button resumeButton;
+    [SerializeField] private Button backToMenuButton;
+    [SerializeField] private GameObject pausePanel;
 
     private void OnEnable()
     {
@@ -20,7 +21,17 @@ public class Menu : MonoBehaviour
         continueButton.onClick.AddListener(Continue);
         creditButton.onClick.AddListener(Credit);
         quitButton.onClick.AddListener(Quit);
-        backButton.onClick.AddListener(Back);
+
+        resumeButton.onClick.AddListener(Resume);
+        backToMenuButton.onClick.AddListener(BackToMenu);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
     }
 
     private void OnDisable()
@@ -29,8 +40,32 @@ public class Menu : MonoBehaviour
         continueButton.onClick.RemoveListener(Continue);
         creditButton.onClick.RemoveListener(Credit);
         quitButton.onClick.RemoveListener(Quit);
-        backButton.onClick.RemoveListener(Back);
     }
+
+    private void Pause()
+    {
+        if (creditPanel.activeSelf)
+        {
+            creditPanel.SetActive(false);
+            menuPanel.SetActive(true);
+        }
+        else
+        {
+            pausePanel.SetActive(true);
+        }
+    }
+
+    private void BackToMenu()
+    {
+        pausePanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
+
+    private void Resume()
+    {
+        pausePanel.SetActive(false);
+    }
+
 
     private void StartGame()
     {
@@ -50,10 +85,5 @@ public class Menu : MonoBehaviour
     private void Quit()
     {
         Application.Quit();
-    }
-
-    private void Back()
-    {
-        creditPanel.SetActive(false);
     }
 }
