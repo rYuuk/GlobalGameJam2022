@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     private void OnLightConsumed()
     {
-        MovePlayerToLastCheckpoint();
+        Invoke(nameof(ResetPlayer),3f);
 
         foreach (var component in resetableComponents)
         {
@@ -65,6 +65,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ResetPlayer()
+    {
+        MovePlayerToLastCheckpoint();
+
+        foreach (var component in resetableComponents)
+        {
+            component.ResetState();
+        }
+    }
+    
     private void MovePlayerToLastCheckpoint()
     {
         var checkpoint = Array.Find(checkpoints, x => x.Id == checkpointData.lastCheckpointID);

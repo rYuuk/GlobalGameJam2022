@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   rotationSpeed: 0.25
-  jumpSpeed: 5
+  jumpSpeed: 10
   ground:
     serializedVersion: 2
     m_Bits: 64
