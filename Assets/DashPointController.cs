@@ -35,7 +35,7 @@ public class DashPointController : MonoBehaviour
                 positionIndex = 0;
             }
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q) && positionIndex < attachPoint.Length-1)
             {
                 holdingTime = startHoldingTime;
                 positionIndex++;
