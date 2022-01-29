@@ -17,7 +17,6 @@ public class Checkpoint : MonoBehaviour
     private void MovePlayerToCheckpoint()
     {
         player.transform.position = transform.position;
-        player.Reset();
     }
     private void OnTriggerEnter(Collider other)
     {
