@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -64,7 +65,6 @@ public class CharacterController : MonoBehaviour
         switch (playerState)
         {
             case PlayerStates.Walking:
-                waveMaterial.SetFloat("_WaveIntensity", 0.2f);
                 Gravity();
                 Movement(h);
                 Jump();
@@ -154,15 +154,27 @@ public class CharacterController : MonoBehaviour
             var dashVector = new Vector3(dashTarget.position.x + ((facingRight ? 1 : -1) * dashValue),
                 dashTarget.position.y);
             transform.DOMove(dashVector, 0.5f);
-            waveMaterial.SetFloat("_WaveIntensity", 0.5f);
-            isDashEnabled = false;
-            playerState = PlayerStates.Walking;
+            waveMaterial.SetFloat("_WaveSpeed",10f);
+            waveMaterial.SetFloat("_WaveIntensity",0.2f);
+            waveMaterial.SetFloat("_WaveRate",10f);
+            StartCoroutine(DashReset());
         }
     }
 
     private void OnCollisionEnter(Collision _)
     {
         playerState = PlayerStates.Walking;
+    }
+
+    private IEnumerator DashReset()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isDashEnabled = false;
+        playerState = PlayerStates.Walking;
+        transform.localScale = new Vector3(1, 1, 1);
+        waveMaterial.SetFloat("_WaveSpeed",5);
+        waveMaterial.SetFloat("_WaveIntensity",0.01f);
+        waveMaterial.SetFloat("_WaveRate",4f);
     }
 
     private void Death()
