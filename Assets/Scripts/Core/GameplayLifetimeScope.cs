@@ -9,6 +9,7 @@ public class GameplayLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(FindObjectOfType<GameManager>());
-        builder.RegisterInstance<CheckpointData>(checkpointData);
+        builder.RegisterInstance(checkpointData);
+        builder.RegisterInstance(FindObjectOfType<PlayerLight>());
     }
 }
