@@ -4,7 +4,7 @@ using VContainer;
 
 public class GameManager : MonoBehaviour
 {
-    [Inject] private GameData gameData;
+    [Inject] private CheckpointData checkpointData;
     public enum State
     {
         Running,
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCheckpointID(int id)
     {
-        gameData.lastCheckpointID = id;
+        checkpointData.lastCheckpointID = id;
     }
 
     private void Update()

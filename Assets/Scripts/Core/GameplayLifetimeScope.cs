@@ -4,11 +4,11 @@ using VContainer.Unity;
 
 public class GameplayLifetimeScope : LifetimeScope
 {
-    [SerializeField] private GameData gameData;
+    [SerializeField] private CheckpointData checkpointData;
     
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(FindObjectOfType<GameManager>());
-        builder.RegisterInstance<GameData>(gameData);
+        builder.RegisterInstance<CheckpointData>(checkpointData);
     }
 }
