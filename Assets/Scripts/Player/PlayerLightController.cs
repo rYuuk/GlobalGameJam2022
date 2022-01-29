@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LightController : MonoBehaviour
+public class PlayerLightController : MonoBehaviour
 {
     public Light characterHalo;
 

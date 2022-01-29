@@ -7,7 +7,8 @@ public class CharacterController : MonoBehaviour
     public enum PlayerStates
     {
         Walking,
-        Dashing
+        Dashing,
+        Wave
     }
     
     [Header("Basic Movement")] 
@@ -15,12 +16,14 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float jumpSpeed;
-    [SerializeField] private float gravitySpeed = -9.8f;
+    [SerializeField] private float defaultGravitySpeed = -9.8f;
     [SerializeField] private LayerMask ground;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private bool isGrounded;
     public PlayerStates playerState;
+    public float gravity;
+    public float waveGravity;
     private bool facingRight = true;
 
     [Header("Dash")] 
@@ -54,7 +57,9 @@ public class CharacterController : MonoBehaviour
                 rigidbody.velocity = Vector3.zero;
                 rigidbody.useGravity = false;
                 break;
-                
+            case PlayerStates.Wave:
+                WaveGravity();
+                break;
         }
     }
 
@@ -99,11 +104,16 @@ public class CharacterController : MonoBehaviour
 
     private void Gravity()
     {
-        if (!rigidbody.useGravity)
+        if ((!rigidbody.useGravity))
         {
             rigidbody.useGravity = true;
         }
-        rigidbody.AddForce(Vector3.up * gravitySpeed);
+        rigidbody.AddForce(Vector3.up * gravity);
+    }
+
+    private void WaveGravity()
+    {
+        rigidbody.AddForce(Vector3.up * waveGravity);
     }
 
     private void Dash(float h)
@@ -112,5 +122,10 @@ public class CharacterController : MonoBehaviour
         {
             
         }
+    }
+
+    private void Death()
+    {
+        
     }
 }

@@ -8,12 +8,11 @@ public class ReflectionPointController : MonoBehaviour
 {
     [SerializeField] private Transform[] attachPoint;
     [SerializeField] private bool isHoldingPlayer;
-
     [SerializeField] private float startHoldingTime;
     private float holdingTime;
     private int positionIndex = 0;
-
     private CharacterController player;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +41,7 @@ public class ReflectionPointController : MonoBehaviour
                 player.transform.DOMove(attachPoint[positionIndex].position, 0.3f);
                 player.transform.DOLookAt(attachPoint[positionIndex].position,0.15f);
             }
+            
         }
     }
 
