@@ -5,6 +5,7 @@ using VContainer;
 public class GameManager : MonoBehaviour
 {
     [Inject] private GameData gameData;
+
     public enum State
     {
         Running,

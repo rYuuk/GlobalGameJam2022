@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using VContainer;
 
@@ -12,12 +13,21 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private int id;
     
     private const string PlayerTag = "Player";
+    private Animator animator;
+    private static readonly int IsActive = Animator.StringToHash("IsActive");
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(PlayerTag))
         {
             gameManager.SetCheckpointID(id);
+            
+            animator.SetBool(IsActive, true);
         }
     }
 }
