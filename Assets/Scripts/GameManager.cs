@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using VContainer;
 
 public class GameManager : MonoBehaviour
 {
+    [Inject] private GameData gameData;
     public enum State
     {
         Running,
@@ -28,6 +30,11 @@ public class GameManager : MonoBehaviour
     {
         state = State.Finish;
         Finished?.Invoke();
+    }
+
+    public void SetCheckpointID(int id)
+    {
+        gameData.lastCheckpointID = id;
     }
 
     private void Update()

@@ -49,3 +49,5 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 0}
+  - {fileID: 0}
+  gameData: {fileID: 11400000, guid: 4fd8d165cfc718e40986cdd0850ac1bb, type: 2}
