@@ -66,7 +66,9 @@ public class PlayerLight : MonoBehaviour, IResetable
 
     private float CalculateClampedValue()
     {
-        var clampedValue = (3/currentLightUnits);
+        var clampedValue = 1 - (currentLightUnits/maxLightUnits);
         return clampedValue;
     }
+
+    public void ResetVignette() => cameraVignette.intensity.Override(0f); 
 }

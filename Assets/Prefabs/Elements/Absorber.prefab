@@ -110,4 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7ef8c064bd37144a1cb769a435b337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumptionAffector: 0.005
+  affectRate: 1
+  capacity: 3
+  infiniteCapacity: 0
