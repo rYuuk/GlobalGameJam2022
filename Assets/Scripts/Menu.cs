@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 public class Menu : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button creditButton;
     [SerializeField] private Button quitButton;
 
-    [Header("Pause")] [SerializeField] private Button resumeButton;
+    [Header("Pause")] 
+    [SerializeField] private Button resumeButton;
     [SerializeField] private Button backToMenuButton;
     [SerializeField] private GameObject pausePanel;
+
+    [Inject] private GameManager gameManager;
 
     private void OnEnable()
     {
@@ -24,14 +28,7 @@ public class Menu : MonoBehaviour
 
         resumeButton.onClick.AddListener(Resume);
         backToMenuButton.onClick.AddListener(BackToMenu);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
-        }
+        gameManager.Paused += Pause;
     }
 
     private void OnDisable()
@@ -40,6 +37,7 @@ public class Menu : MonoBehaviour
         continueButton.onClick.RemoveListener(Continue);
         creditButton.onClick.RemoveListener(Credit);
         quitButton.onClick.RemoveListener(Quit);
+        gameManager.Paused -= Pause;
     }
 
     private void Pause()

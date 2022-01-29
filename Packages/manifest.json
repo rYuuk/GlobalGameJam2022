@@ -36,6 +36,16 @@
     "com.unity.modules.unitywebrequestwww": "1.0.0",
     "com.unity.modules.vehicles": "1.0.0",
     "com.unity.modules.video": "1.0.0",
-    "com.unity.modules.wind": "1.0.0"
-  }
+    "com.unity.modules.wind": "1.0.0",
+    "jp.hadashikick.vcontainer": "1.10.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes":[
+      "jp.hadashikick"
+      ]
+    }
+  ]
 }
