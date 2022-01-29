@@ -31,8 +31,7 @@ public class CharacterController : MonoBehaviour
     [Header("Dash")] 
     
     public float dashValue;
-    public float startDashTime;
-    private float dashTime;
+    [SerializeField] private Material waveMaterial;
     private int direction;
     private bool isDashEnabled;
 
@@ -45,7 +44,6 @@ public class CharacterController : MonoBehaviour
     {
         playerLight = GetComponent<PlayerLight>();
         playerState = PlayerStates.Walking;
-        dashTime = startDashTime;
     }
 
     private void OnEnable()
@@ -66,6 +64,7 @@ public class CharacterController : MonoBehaviour
         switch (playerState)
         {
             case PlayerStates.Walking:
+                waveMaterial.SetFloat("_WaveIntensity",0.2f);
                 Gravity();
                 Movement(h);
                 Jump();                
@@ -147,20 +146,14 @@ public class CharacterController : MonoBehaviour
         rigidbody.AddForce(Vector3.up * waveGravity);
     }
 
+    public Vector3 dashTarget;
     private void Dash()
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            if (facingRight)
-            {
-                Vector3 dashTarget = new Vector3(transform.position.x + dashValue, transform.position.y);
-                transform.DOMove(dashTarget,0.5f);
-            }
-            else
-            {
-                Vector3 dashTarget = new Vector3(transform.position.x - dashValue, transform.position.y);
-                transform.DOMove(dashTarget,0.5f);  
-            }    
+            dashTarget = new Vector3(transform.position.x + (facingRight ? 1 : -1 * dashValue), transform.position.y);
+            transform.DOMove(dashTarget, 0.5f);
+            waveMaterial.SetFloat("_WaveIntensity",0.5f);
             isDashEnabled = false;
             playerState = PlayerStates.Walking;
         }
