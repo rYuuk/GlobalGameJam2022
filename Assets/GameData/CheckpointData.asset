@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1969725cbcf65f249af38da340f83529, type: 3}
-  m_Name: GameData
+  m_Name: CheckpointData
   m_EditorClassIdentifier: 
   lastCheckpointID: 0
