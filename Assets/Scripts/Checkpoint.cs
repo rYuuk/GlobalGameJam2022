@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using VContainer;
 
@@ -12,6 +11,7 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
+        
     }
 
     private void MovePlayerToCheckpoint()
