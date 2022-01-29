@@ -168,7 +168,6 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 0.25
   jumpSpeed: 5
-  defaultGravitySpeed: -9.8
   ground:
     serializedVersion: 2
     m_Bits: 64
@@ -192,11 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fecb2b3ba1e6641a727305bb037593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLightUnits: 3
+  currentLightUnits: 3
   characterHalo: {fileID: 8080874176536542529}
-  lightLife: 3
-  startConsumptionRate: 0.01
-  consumptionRate: 0.1
-  maxLightRange: 3
+  defaultConsumptionRate: 0.01
 --- !u!1 &8080874176473527938
 GameObject:
   m_ObjectHideFlags: 0
