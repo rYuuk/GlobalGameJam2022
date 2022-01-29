@@ -1,8 +1,8 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
-using VContainer;
 
+[RequireComponent(typeof(PlayerLight))]
 public class CharacterController : MonoBehaviour
 {
     public enum PlayerStates
@@ -10,7 +10,8 @@ public class CharacterController : MonoBehaviour
         Walking,
         Reflecting,
         Dashing,
-        Wave
+        Wave,
+        Dead
     }
     
     [Header("Basic Movement")] 
@@ -38,10 +39,22 @@ public class CharacterController : MonoBehaviour
     [Header("Animation")] 
     [SerializeField] private Animator playerAnimator;
 
-    private void Start()
+    private PlayerLight playerLight;
+
+    private void Awake()
     {
+        playerLight = GetComponent<PlayerLight>();
         playerState = PlayerStates.Walking;
         dashTime = startDashTime;
+    }
+
+    private void OnEnable()
+    {
+        playerLight.LightConsumed += Death;
+    }
+    private void OnDisable()
+    {
+        playerLight.LightConsumed -= Death;
     }
 
     // Update is called once per frame
@@ -67,6 +80,8 @@ public class CharacterController : MonoBehaviour
                 WaveGravity();
                 Dash();
                 break;
+            case PlayerStates.Dead:
+                break;;
         }
     }
 
@@ -172,6 +187,7 @@ public class CharacterController : MonoBehaviour
 
     private void Death()
     {
+        playerState = PlayerStates.Dead;
         playerAnimator.SetTrigger("Death");
     }
 }
