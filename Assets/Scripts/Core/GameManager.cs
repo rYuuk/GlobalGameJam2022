@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     private void MovePlayerToLastCheckpoint()
     {
-        var checkpoint = checkpoints[checkpointData.lastCheckpointID];
+        var checkpoint = Array.Find(checkpoints, x => x.Id == checkpointData.lastCheckpointID);
         playerLight.transform.position = (checkpoint.SpawnPosition);
     }
 
@@ -76,10 +76,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
-        }
-
-        if (playerLight.CurrentLightUnits == 0)
-        {
         }
     }
 

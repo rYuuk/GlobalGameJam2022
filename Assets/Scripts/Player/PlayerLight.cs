@@ -49,24 +49,27 @@ public class PlayerLight : MonoBehaviour, IResetable
         currentLightUnits = Mathf.Clamp(currentLightUnits, 0, maxLightUnits);
         characterHalo.range = currentLightUnits;
 
+        cameraVignette.intensity.Override(CalculateClampedValue());
+
         if (currentLightUnits == 0)
         {
             isLightConsumed = true;
             LightConsumed?.Invoke();
         }
-        
-        cameraVignette.intensity.Override(CalculateClampedValue()); 
     }
 
     public void ResetState()
     {
         isLightConsumed = false;
+        currentLightUnits = maxLightUnits;
         ResetConsumptionRate();
     }
 
     private float CalculateClampedValue()
     {
-        var clampedValue = (3/currentLightUnits);
+        var clampedValue = 1 - (currentLightUnits/maxLightUnits);
         return clampedValue;
     }
+
+    public void ResetVignette() => cameraVignette.intensity.Override(0f); 
 }

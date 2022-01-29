@@ -155,7 +155,7 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        throw new NotImplementedException();
+       
     }
 
     private void Death()
