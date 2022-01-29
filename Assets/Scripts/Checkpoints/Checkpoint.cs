@@ -7,6 +7,7 @@ using VContainer;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private int id;
     
     [Inject] private GameManager gameManager;
@@ -17,6 +18,7 @@ public class Checkpoint : MonoBehaviour
 
     private const string PlayerTag = "Player";
     private Animator animator;
+    private bool isActivated;
     private static readonly int IsActive = Animator.StringToHash("IsActive");
 
     private void Awake()
@@ -26,10 +28,11 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(PlayerTag))
+        if (other.gameObject.CompareTag(PlayerTag) && !isActivated)
         {
+            isActivated = true;
             gameManager.SetCheckpointID(id);
-            
+            audioSource.Play();
             animator.SetBool(IsActive, true);
         }
     }
