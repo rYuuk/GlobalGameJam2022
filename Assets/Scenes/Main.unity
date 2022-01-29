@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1753100849893130087, guid: 50c0229520978b04ea19d805c9023f24, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.07
+      value: 22.81
       objectReference: {fileID: 0}
     - target: {fileID: 1753100849893130087, guid: 50c0229520978b04ea19d805c9023f24, type: 3}
       propertyPath: m_LocalPosition.y
@@ -495,6 +495,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1215341823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8080874176370709752, guid: 9f1c5b0e176639b44af3820d7bf3c38b, type: 3}
+  m_PrefabInstance: {fileID: 1355235010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1215341830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8080874176370709747, guid: 9f1c5b0e176639b44af3820d7bf3c38b, type: 3}
@@ -1267,6 +1272,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1777918731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1377981930726811101, guid: 50c0229520978b04ea19d805c9023f24, type: 3}
+  m_PrefabInstance: {fileID: 379180623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,7 +1778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
       propertyPath: autoInjectGameObjects.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[0]
@@ -1790,6 +1800,14 @@ PrefabInstance:
       propertyPath: autoInjectGameObjects.Array.data[4]
       value: 
       objectReference: {fileID: 1493695668}
+    - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
+      propertyPath: autoInjectGameObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 1215341823}
+    - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
+      propertyPath: autoInjectGameObjects.Array.data[6]
+      value: 
+      objectReference: {fileID: 1777918731}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
 --- !u!1001 &4466143186856582280

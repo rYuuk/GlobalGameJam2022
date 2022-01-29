@@ -26,7 +26,7 @@ public class PrismExplosion : MonoBehaviour
         {
             explosion.Play();
             animator.SetTrigger("Explode");
-            gameManager.Finished();
+            gameManager.Finish();
         }
 
         isTriggered = true;
