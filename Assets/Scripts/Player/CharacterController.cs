@@ -151,8 +151,7 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            var dashVector = new Vector3(dashTarget.position.x + ((facingRight ? 1 : -1) * dashValue),
-                dashTarget.position.y);
+            var dashVector = transform.position + (dashTarget.right *  dashValue);
             transform.DOMove(dashVector, 0.5f);
             waveMaterial.SetFloat("_WaveSpeed",10f);
             waveMaterial.SetFloat("_WaveIntensity",0.2f);
