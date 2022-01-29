@@ -55,7 +55,7 @@ public class CharacterController : MonoBehaviour
             case PlayerStates.Walking:
                 Gravity();
                 Movement(h);
-                if (Input.GetButton("Jump") && isGrounded) playerAnimator.SetTrigger("jump");
+                Jump();                
                 Flip(h);                
                 break;
             case PlayerStates.Reflecting:
@@ -98,9 +98,18 @@ public class CharacterController : MonoBehaviour
 
     private void Jump() //Called from Animation Event 
     {
+        if ((Input.GetButton("Jump") && isGrounded))
+        {
+            playerAnimator.SetTrigger("jump");
+            CancelInvoke(nameof(ActualJump));
+            Invoke(nameof(ActualJump),0.2f);
+        }
         
+    }
+
+    private void ActualJump()
+    {
         rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-        
     }
 
     private void GroundCheck()
