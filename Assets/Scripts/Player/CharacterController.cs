@@ -29,7 +29,7 @@ public class CharacterController : MonoBehaviour
 
     [Header("Dash")] 
     
-    public float dashSpeed;
+    public float dashValue;
     public float startDashTime;
     private float dashTime;
     private int direction;
@@ -44,11 +44,12 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        GroundCheck();
         float h = Input.GetAxis("Horizontal");
+        
         switch (playerState)
         {
             case PlayerStates.Walking:
-                GroundCheck();
                 Gravity();
                 Movement(h);
                 Jump();
@@ -59,7 +60,9 @@ public class CharacterController : MonoBehaviour
                 rigidbody.useGravity = false;
                 break;
             case PlayerStates.Wave:
+                isDashEnabled = true;
                 WaveGravity();
+                Dash();
                 break;
         }
     }
@@ -117,12 +120,37 @@ public class CharacterController : MonoBehaviour
         rigidbody.AddForce(Vector3.up * waveGravity);
     }
 
-    private void Dash(float h)
+    private void Dash()
     {
-        if (isDashEnabled)
+        if (Input.GetButton("Jump") && isDashEnabled)
         {
-            
+            if (facingRight)
+            {
+                Vector3 dashTarget = new Vector3(transform.position.x + dashValue, transform.position.y);
+                transform.DOMove(dashTarget,0.5f);
+            }
+            else
+            {
+                Vector3 dashTarget = new Vector3(transform.position.x - dashValue, transform.position.y);
+                transform.DOMove(dashTarget,0.5f);  
+            }    
+            isDashEnabled = false;
+            playerState = PlayerStates.Walking;
         }
+    }
+
+    public void setDashDirection(Vector3 dashTarget)
+    {
+        
+    }
+    private void OnCollisionEnter(Collision _)
+    {
+        playerState = PlayerStates.Walking;
+    }
+
+    private void OnTriggerExit(Collider _)
+    {
+        
     }
 
     private void Death()
