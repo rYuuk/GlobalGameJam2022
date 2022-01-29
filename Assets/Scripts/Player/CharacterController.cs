@@ -86,7 +86,7 @@ public class CharacterController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButton("Jump") && isGrounded)
         {
             rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         }
