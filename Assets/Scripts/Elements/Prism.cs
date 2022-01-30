@@ -11,6 +11,7 @@ public class Prism : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource audioSource;
 
+    public bool IsTriggered => isTriggered;
     private bool isTriggered;
     
     private Collider col;
