@@ -46,6 +46,9 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
+        waveMaterial.SetFloat("_WaveSpeed", 5);
+        waveMaterial.SetFloat("_WaveIntensity", 0.01f);
+        waveMaterial.SetFloat("_WaveRate", 4f);
         playerLight = GetComponent<PlayerLight>();
         playerState = PlayerStates.Walking;
     }
