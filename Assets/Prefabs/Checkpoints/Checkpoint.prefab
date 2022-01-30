@@ -457,6 +457,10 @@ MonoBehaviour:
   spawnPoint: {fileID: 6519775566070462854}
   audioSource: {fileID: 6102264850640998837}
   id: 0
+  duration: 0.1
+  strength: 0.4
+  randomness: 40
+  vibrato: 5
 --- !u!95 &7595592918578331216
 Animator:
   serializedVersion: 4

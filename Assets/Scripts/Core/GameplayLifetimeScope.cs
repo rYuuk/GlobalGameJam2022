@@ -16,5 +16,6 @@ public class GameplayLifetimeScope : LifetimeScope
         builder.RegisterInstance(FindObjectOfType<PlayerLight>());
         builder.RegisterInstance(FindObjectsOfType<Checkpoint>());
         builder.RegisterInstance(FindObjectsOfType<MonoBehaviour>().OfType<IResetable>().ToArray());
+        builder.RegisterInstance(Camera.main);
     }
 }
