@@ -33,7 +33,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float randomness = 90f;
     [SerializeField] private int vibrato = 10;
 
+    [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
+
+    [SerializeField] private AudioClip dashClip;
+    [SerializeField] private AudioClip deathClip;
 
     [Inject] private Camera mainCamera;
 
@@ -194,6 +198,7 @@ public class Player : MonoBehaviour
 
             transform.DOMove(dashVector, dashTime);
             
+            audioSource.clip = dashClip;
             audioSource.Play();
 
             SetWaveMaterialProperties(10f, 0.2f, 10f);
@@ -242,6 +247,8 @@ public class Player : MonoBehaviour
     {
         playerState = PlayerStates.Dead;
         animator.SetTrigger("Death");
+        audioSource.clip = deathClip;
+        audioSource.Play();
     }
 
     private void OnDrawGizmosSelected()
