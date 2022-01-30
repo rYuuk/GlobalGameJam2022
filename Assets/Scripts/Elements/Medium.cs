@@ -19,13 +19,11 @@ public class Medium : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player.playerState = CharacterController.PlayerStates.Wave;
-        player.dashTarget = dashTarget;
-        player.dashValue = dashValue;
-        player.dashTime = dashTime;
+        player.EnableDash(dashTarget, dashValue, dashTime);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        player.dashTarget = null;
+        player.DisableDash();
     }
 }

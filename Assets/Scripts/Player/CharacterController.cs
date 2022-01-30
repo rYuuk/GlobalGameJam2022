@@ -29,16 +29,16 @@ public class CharacterController : MonoBehaviour
     public float waveGravity;
     private bool facingRight = true;
 
-    [Header("Dash")]
-    [SerializeField] private Material waveMaterial;
+    [Header("Dash")] [SerializeField] private Material waveMaterial;
     private int direction;
     public float dashValue;
     public float dashTime;
-    private bool isDashEnabled;
     public Transform dashTarget;
 
-    [Header("Animation")] 
-    [SerializeField] private Animator playerAnimator;
+    public bool isDashEnabled;
+
+
+    [Header("Animation")] [SerializeField] private Animator playerAnimator;
 
     private PlayerLight playerLight;
     private bool isJumping = false;
@@ -79,7 +79,6 @@ public class CharacterController : MonoBehaviour
                 rigidbody.useGravity = false;
                 break;
             case PlayerStates.Wave:
-                isDashEnabled = true;
                 WaveGravity();
                 Dash();
                 break;
@@ -88,6 +87,20 @@ public class CharacterController : MonoBehaviour
             case PlayerStates.Dashing:
                 break;
         }
+    }
+
+    public void EnableDash(Transform target, float value, float time)
+    {
+        isDashEnabled = true;
+        dashTarget = target;
+        dashValue = value;
+        dashTime = time;
+    }
+
+    public void DisableDash()
+    {
+        isDashEnabled = false;
+        dashTarget = null;
     }
 
     private void Movement(float h)
@@ -159,11 +172,12 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            var dashVector = transform.position + (dashTarget.right *  dashValue);
+            Debug.Log("Dash");
+            var dashVector = transform.position + (dashTarget.right * dashValue);
             transform.DOMove(dashVector, dashTime);
-            waveMaterial.SetFloat("_WaveSpeed",10f);
-            waveMaterial.SetFloat("_WaveIntensity",0.2f);
-            waveMaterial.SetFloat("_WaveRate",10f);
+            waveMaterial.SetFloat("_WaveSpeed", 10f);
+            waveMaterial.SetFloat("_WaveIntensity", 0.2f);
+            waveMaterial.SetFloat("_WaveRate", 10f);
             StartCoroutine(DashReset());
         }
     }
@@ -182,16 +196,16 @@ public class CharacterController : MonoBehaviour
             StartCoroutine(DashReset());
         }
     }
-    
-    public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+
+    private bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
         return ((layerMask.value & (1 << obj.layer)) > 0);
     }
 
     private IEnumerator DashReset()
     {
-        yield return new WaitForSeconds(dashTime);
         isDashEnabled = false;
+        yield return new WaitForSeconds(dashTime);
         playerState = PlayerStates.Walking;
         transform.localScale = new Vector3(1, 1, 1);
         waveMaterial.SetFloat("_WaveSpeed", 5);
