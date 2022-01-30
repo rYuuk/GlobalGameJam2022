@@ -1626,6 +1626,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401629566}
   m_Mesh: {fileID: 2145109057640344484, guid: aab1438b68d9aca4bbdb6a437964cc94, type: 3}
+--- !u!1 &1446436846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8889687825087852235, guid: fabbda91bf2009a45b01dbd7f3790050, type: 3}
+  m_PrefabInstance: {fileID: 1287733108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1493695668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 828490845320007535, guid: f0f45a900edc4814593e947fff532d67, type: 3}
@@ -3412,6 +3417,10 @@ PrefabInstance:
       value: LifetimeScope
       objectReference: {fileID: 0}
     - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
+      propertyPath: autoInjectGameObjects.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[0]
       value: 
       objectReference: {fileID: 2466354298153873390}
@@ -3439,6 +3448,10 @@ PrefabInstance:
       propertyPath: autoInjectGameObjects.Array.data[6]
       value: 
       objectReference: {fileID: 1777918731}
+    - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
+      propertyPath: autoInjectGameObjects.Array.data[7]
+      value: 
+      objectReference: {fileID: 1446436846}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
 --- !u!1001 &4466143186856582280
