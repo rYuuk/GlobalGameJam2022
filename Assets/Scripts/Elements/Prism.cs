@@ -3,12 +3,13 @@ using UnityEngine.VFX;
 using VContainer;
 
 [RequireComponent(typeof(SphereCollider))]
-public class PrismExplosion : MonoBehaviour
+public class Prism : MonoBehaviour
 {
     [Inject] private GameManager gameManager;
 
     [SerializeField] private VisualEffect explosion;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
 
     private bool isTriggered;
     
@@ -28,6 +29,7 @@ public class PrismExplosion : MonoBehaviour
             explosion.Play();
             animator.SetTrigger(Explode);
             gameManager.Finish();
+            audioSource.Play();
         }
 
         isTriggered = true;
