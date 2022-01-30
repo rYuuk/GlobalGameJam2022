@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         playerLight.LightConsumed -= Death;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         GroundCheck();
         var h = Input.GetAxis("Horizontal");
