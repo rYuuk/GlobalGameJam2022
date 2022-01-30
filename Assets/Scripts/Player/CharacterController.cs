@@ -27,7 +27,6 @@ public class CharacterController : MonoBehaviour
     public PlayerStates playerState;
     public float gravity;
     public float waveGravity;
-    private bool facingRight = true;
 
     [Header("Dash")] [SerializeField] private Material waveMaterial;
     private int direction;
@@ -60,7 +59,6 @@ public class CharacterController : MonoBehaviour
         playerLight.LightConsumed -= Death;
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         GroundCheck();
@@ -105,14 +103,13 @@ public class CharacterController : MonoBehaviour
 
     private void Movement(float h)
     {
-        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        if (!isGrounded)
         {
-            rigidbody.velocity = new Vector3(h * speed * 1.5f, rigidbody.velocity.y, 0f);
+            return;
         }
-        else
-        {
-            rigidbody.velocity = new Vector3(h * speed, rigidbody.velocity.y, 0f);
-        }
+
+        var speedX = Input.GetKey(KeyCode.LeftShift) ? h * speed * 1.5f : h * speed;
+        rigidbody.velocity = new Vector3(speedX, rigidbody.velocity.y, 0f);
     }
 
     private void Flip(float h)
@@ -120,16 +117,14 @@ public class CharacterController : MonoBehaviour
         if (h > 0)
         {
             transform.DORotate(Vector3.zero, rotationSpeed);
-            facingRight = true;
         }
         else if (h < 0)
         {
             transform.DORotate(new Vector3(0, 180, 0), rotationSpeed);
-            facingRight = false;
         }
     }
 
-    private void Jump() //Called from Animation Event 
+    private void Jump()
     {
         if ((Input.GetButton("Jump")))
         {
