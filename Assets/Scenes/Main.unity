@@ -1356,6 +1356,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1280959610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3750094776241792491, guid: 28c49132f09303848bfa36b5da03632a, type: 3}
+  m_PrefabInstance: {fileID: 2020957895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1287733108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3407,14 +3412,6 @@ PrefabInstance:
       value: LifetimeScope
       objectReference: {fileID: 0}
     - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
-      propertyPath: checkpointData
-      value: 
-      objectReference: {fileID: 11400000, guid: 4fd8d165cfc718e40986cdd0850ac1bb, type: 2}
-    - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
-      propertyPath: autoInjectGameObjects.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[0]
       value: 
       objectReference: {fileID: 2466354298153873390}
@@ -3429,7 +3426,7 @@ PrefabInstance:
     - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280959610}
     - target: {fileID: 3279286460736589063, guid: b59a210eef7466843b17e2876b5f2b3f, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[4]
       value: 
