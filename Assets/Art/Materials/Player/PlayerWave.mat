@@ -38,7 +38,9 @@ Material:
     - _WaveIntensity: 0.01
     - _WaveRate: 4
     - _WaveSpeed: 5
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 1.552941, g: 1.796078, b: 0.3529412, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8778622983084535277
 MonoBehaviour:
