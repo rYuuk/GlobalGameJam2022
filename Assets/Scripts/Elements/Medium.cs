@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Medium : MonoBehaviour
 {
-    [SerializeField] Transform dashTarget;
+    [SerializeField] private Transform dashTarget;
+    [SerializeField] private float dashValue;
+    [SerializeField] private float dashTime;
 
     private Vector3 Target;
     private float holdingTime;
@@ -18,6 +20,8 @@ public class Medium : MonoBehaviour
     {
         player.playerState = CharacterController.PlayerStates.Wave;
         player.dashTarget = dashTarget;
+        player.dashValue = dashValue;
+        player.dashTime = dashTime;
     }
 
     private void OnTriggerExit(Collider other)

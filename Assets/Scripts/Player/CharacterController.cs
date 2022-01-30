@@ -29,15 +29,16 @@ public class CharacterController : MonoBehaviour
     public float waveGravity;
     private bool facingRight = true;
 
-    [Header("Dash")] [SerializeField] private float dashValue;
+    [Header("Dash")]
     [SerializeField] private Material waveMaterial;
-
+    private int direction;
+    public float dashValue;
+    public float dashTime;
+    private bool isDashEnabled;
     public Transform dashTarget;
 
-    private int direction;
-    private bool isDashEnabled;
-
-    [Header("Animation")] [SerializeField] private Animator playerAnimator;
+    [Header("Animation")] 
+    [SerializeField] private Animator playerAnimator;
 
     private PlayerLight playerLight;
     private bool isJumping = false;
@@ -158,11 +159,11 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            var dashVector = transform.position + (dashTarget.right * dashValue);
-            transform.DOMove(dashVector, 0.5f);
-            waveMaterial.SetFloat("_WaveSpeed", 10f);
-            waveMaterial.SetFloat("_WaveIntensity", 0.2f);
-            waveMaterial.SetFloat("_WaveRate", 10f);
+            var dashVector = transform.position + (dashTarget.right *  dashValue);
+            transform.DOMove(dashVector, dashTime);
+            waveMaterial.SetFloat("_WaveSpeed",10f);
+            waveMaterial.SetFloat("_WaveIntensity",0.2f);
+            waveMaterial.SetFloat("_WaveRate",10f);
             StartCoroutine(DashReset());
         }
     }
@@ -174,6 +175,12 @@ public class CharacterController : MonoBehaviour
             isJumping = false;
         }
         playerState = PlayerStates.Walking;
+        transform.DOKill(true);
+        if (playerState == PlayerStates.Wave)
+        {
+            dashTime = 0.1f;
+            StartCoroutine(DashReset());
+        }
     }
     
     public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
@@ -183,7 +190,7 @@ public class CharacterController : MonoBehaviour
 
     private IEnumerator DashReset()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(dashTime);
         isDashEnabled = false;
         playerState = PlayerStates.Walking;
         transform.localScale = new Vector3(1, 1, 1);
