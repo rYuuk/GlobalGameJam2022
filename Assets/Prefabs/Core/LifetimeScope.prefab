@@ -54,5 +54,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  checkpointData: {fileID: 0}
+  checkpointData: {fileID: 11400000, guid: 4fd8d165cfc718e40986cdd0850ac1bb, type: 2}

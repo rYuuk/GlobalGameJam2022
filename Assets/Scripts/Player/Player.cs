@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(Animator), typeof(PlayerLight))]
-public class CharacterController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public enum PlayerStates
     {

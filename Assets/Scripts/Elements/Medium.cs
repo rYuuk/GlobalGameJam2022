@@ -8,12 +8,12 @@ public class Medium : MonoBehaviour
 
     private Vector3 Target;
     private float holdingTime;
-    private CharacterController player;
+    private Player player;
 
 
     private void Start()
     {
-        player = FindObjectOfType<CharacterController>();
+        player = FindObjectOfType<Player>();
     }
 
     private void OnTriggerEnter(Collider other)

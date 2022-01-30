@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     {
         if (target==null)
         {
-            target = FindObjectOfType<CharacterController>().transform;
+            target = FindObjectOfType<Player>().transform;
         }
     }
 

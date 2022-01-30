@@ -10,12 +10,12 @@ public class ReflectionPointController : MonoBehaviour
     [SerializeField] private bool isHoldingPlayer;
     [SerializeField] private float reflectTime;
     private int positionIndex = 0;
-    private CharacterController player;
+    private Player player;
     
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<CharacterController>();
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class ReflectionPointController : MonoBehaviour
             {
                 positionIndex = 0;
                 isHoldingPlayer = false;
-                player.playerState = CharacterController.PlayerStates.Walking;
+                player.playerState = Player.PlayerStates.Walking;
                 player.transform.DOLookAt(Vector3.right, 0.05f);
             }
             
@@ -45,7 +45,7 @@ public class ReflectionPointController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player.transform.DOMove(attachPoint[positionIndex].transform.position, 0.3f);
-        player.playerState = CharacterController.PlayerStates.Reflecting;
+        player.playerState = Player.PlayerStates.Reflecting;
         isHoldingPlayer = true;
     }
 }

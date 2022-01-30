@@ -6,13 +6,13 @@ using UnityEngine;
 public class ReflectPoint : MonoBehaviour
 {
     [SerializeField] private float range;
-    private CharacterController player;
+    private Player player;
     private float distanceToPlayer;
     public bool isPlayerInRange;
 
     private void Start()
     {
-        player = FindObjectOfType<CharacterController>();
+        player = FindObjectOfType<Player>();
     }
 
     private void Update()
