@@ -147,7 +147,7 @@ public class CharacterController : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.3f, ground);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f,ground);
         playerAnimator.SetBool("isGrounded", isGrounded);
     }
 
@@ -215,5 +215,10 @@ public class CharacterController : MonoBehaviour
     {
         playerState = PlayerStates.Dead;
         playerAnimator.SetTrigger("Death");
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position,0.2f);
     }
 }

@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     private void MovePlayerToLastCheckpoint()
     {
         var checkpoint = Array.Find(checkpoints, x => x.Id == checkpointData.lastCheckpointID);
-        playerLight.transform.position = (checkpoint.SpawnPosition);
+        playerLight.transform.position = new Vector3(checkpoint.SpawnPosition.x,checkpoint.SpawnPosition.y,0f);
     }
 
     private void Update()
