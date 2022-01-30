@@ -1181,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235076135388845092, guid: 50c0229520978b04ea19d805c9023f24, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.266
+      value: 1.2399994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50c0229520978b04ea19d805c9023f24, type: 3}
@@ -1341,7 +1341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9bdf1aff99efa47ae204cd0a9052e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerInside: 0
   dashTarget: {fileID: 0}
 --- !u!1 &594087150
 GameObject:
@@ -1650,6 +1649,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 731378570}
+    - target: {fileID: 8889687825087850801, guid: fabbda91bf2009a45b01dbd7f3790050, type: 3}
+      propertyPath: offset.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889687825087850801, guid: fabbda91bf2009a45b01dbd7f3790050, type: 3}
+      propertyPath: offset.z
+      value: -8
+      objectReference: {fileID: 0}
     - target: {fileID: 8889687825087850806, guid: fabbda91bf2009a45b01dbd7f3790050, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -2669,7 +2676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8080874176370709747, guid: 9f1c5b0e176639b44af3820d7bf3c38b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.41
+      value: -23.1
       objectReference: {fileID: 0}
     - target: {fileID: 8080874176370709747, guid: 9f1c5b0e176639b44af3820d7bf3c38b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2791,7 +2798,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3947403037783574802, guid: 6ffb8582b38ce8d48977c511c9d7ea95, type: 3}
       propertyPath: range
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7523629401176915453, guid: 6ffb8582b38ce8d48977c511c9d7ea95, type: 3}
       propertyPath: m_Name

@@ -42,13 +42,10 @@ public class ReflectionPointController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            player.transform.DOMove(attachPoint[positionIndex].transform.position, 0.3f);
-            player.playerState = CharacterController.PlayerStates.Reflecting;
-            isHoldingPlayer = true;
-        }
+        player.transform.DOMove(attachPoint[positionIndex].transform.position, 0.3f);
+        player.playerState = CharacterController.PlayerStates.Reflecting;
+        isHoldingPlayer = true;
     }
 }
