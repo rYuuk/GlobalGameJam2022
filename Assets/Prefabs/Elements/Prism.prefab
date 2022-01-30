@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3571551673282254440}
   - component: {fileID: 1689741051528392065}
   - component: {fileID: 7018944620862913423}
+  - component: {fileID: 1777918736}
   m_Layer: 0
   m_Name: Prism
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377981930726811101}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -0, y: 0.812, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
@@ -37,7 +38,7 @@ Transform:
   - {fileID: 9190469599496034509}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!135 &3571551673282254440
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -85,6 +86,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1777918736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377981930726811101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899f8e8c9bc41bc4b80f5263a7bf1559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevelStartPosition: {fileID: 0}
 --- !u!1 &5997887578749823221
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5997887578749823221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 1.24}
+  m_LocalPosition: {x: 0, y: -0, z: 0.266}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -195,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132360145656840243}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 1.6639997}
+  m_LocalPosition: {x: 0, y: -0, z: 1.6}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -311,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8188588255927054770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.00000014901161, z: 1.24}
+  m_LocalPosition: {x: 0, y: -0.000000037252903, z: 0.266}
   m_LocalScale: {x: 2.5, y: 2.4999993, z: 2.4999993}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -465,6 +479,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5781845563234421907, guid: f59f5ebb1fdbf284483723739fcf72cf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f36ef3cf23ac7349be17e1d7966927f, type: 2}
     - target: {fileID: 919132149155446097, guid: f59f5ebb1fdbf284483723739fcf72cf, type: 3}
       propertyPath: m_Name
       value: chrystalHolder_001
