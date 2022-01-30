@@ -276,6 +276,8 @@ MonoBehaviour:
   randomness: 90
   vibrato: 10
   audioSource: {fileID: 3267912872942860839}
+  dashClip: {fileID: 8300000, guid: 4198e000f10276c44b77efcc5e47ab30, type: 3}
+  deathClip: {fileID: 8300000, guid: 20e324b7072f1eb478f1098af32ba40f, type: 3}
   playerState: 0
 --- !u!114 &8080874176370709753
 MonoBehaviour:
