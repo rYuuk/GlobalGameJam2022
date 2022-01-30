@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using VContainer;
 
-[RequireComponent(typeof(PlayerLight))]
+[RequireComponent(typeof(Animator), typeof(PlayerLight))]
 public class CharacterController : MonoBehaviour
 {
     public enum PlayerStates
@@ -15,6 +15,8 @@ public class CharacterController : MonoBehaviour
         Dead
     }
 
+    [SerializeField] private Animator animator;
+
     [Header("Basic Movement")] [SerializeField]
     private float speed;
 
@@ -22,34 +24,42 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private LayerMask ground;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Rigidbody rigidbody;
-    [SerializeField] private bool isGrounded;
+    [SerializeField] private Material waveMaterial;
+
+    [Header("Camera Shake")] [SerializeField]
+    private float duration = 0.5f;
+
+    [SerializeField] private float strength = 0.5f;
+    [SerializeField] private float randomness = 90f;
+    [SerializeField] private int vibrato = 10;
+
+    [Inject] private Camera mainCamera;
+
     public PlayerStates playerState;
-    public float gravity;
-    public float waveGravity;
 
-    [Header("Dash")] [SerializeField] private Material waveMaterial;
-    private int direction;
-    public float dashValue;
-    public float dashTime;
-    public Transform dashTarget;
-
-    public bool isDashEnabled;
-
-
-    [Header("Animation")] [SerializeField] private Animator playerAnimator;
-
+    private Rigidbody rigidbody;
     private PlayerLight playerLight;
-    private bool isJumping = false;
 
+    private bool isDashEnabled;
+    private bool isGrounded;
+    private bool isJumping;
+
+    private int direction;
+
+    private float gravity;
+    private float waveGravity;
+
+    private Transform dashTarget;
+    private float dashValue;
+    private float dashTime;
 
     private void Awake()
     {
-        waveMaterial.SetFloat("_WaveSpeed", 5);
-        waveMaterial.SetFloat("_WaveIntensity", 0.01f);
-        waveMaterial.SetFloat("_WaveRate", 4f);
+        rigidbody = GetComponent<Rigidbody>();
         playerLight = GetComponent<PlayerLight>();
         playerState = PlayerStates.Walking;
+
+        ResetWaveMaterial();
     }
 
     private void OnEnable()
@@ -66,7 +76,7 @@ public class CharacterController : MonoBehaviour
     {
         GroundCheck();
         var h = Input.GetAxis("Horizontal");
-        playerAnimator.SetFloat("speed", h);
+        animator.SetFloat("speed", h);
         switch (playerState)
         {
             case PlayerStates.Walking:
@@ -93,6 +103,7 @@ public class CharacterController : MonoBehaviour
     public void EnableDash(Transform target, float value, float time)
     {
         isDashEnabled = true;
+        playerState = PlayerStates.Wave;
         dashTarget = target;
         dashValue = value;
         dashTime = time;
@@ -100,6 +111,7 @@ public class CharacterController : MonoBehaviour
 
     public void DisableDash()
     {
+        playerState = PlayerStates.Wave;
         isDashEnabled = false;
         dashTarget = null;
     }
@@ -117,13 +129,14 @@ public class CharacterController : MonoBehaviour
 
     private void Flip(float h)
     {
-        if (h > 0)
+        switch (h)
         {
-            transform.DORotate(Vector3.zero, rotationSpeed);
-        }
-        else if (h < 0)
-        {
-            transform.DORotate(new Vector3(0, 180, 0), rotationSpeed);
+            case > 0:
+                transform.DORotate(Vector3.zero, rotationSpeed);
+                break;
+            case < 0:
+                transform.DORotate(new Vector3(0, 180, 0), rotationSpeed);
+                break;
         }
     }
 
@@ -134,7 +147,7 @@ public class CharacterController : MonoBehaviour
             if (isGrounded && !isJumping)
             {
                 isJumping = true;
-                playerAnimator.SetTrigger("jump");
+                animator.SetTrigger("jump");
                 Invoke(nameof(ActualJump), 0.02f);
             }
         }
@@ -147,8 +160,8 @@ public class CharacterController : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f,ground);
-        playerAnimator.SetBool("isGrounded", isGrounded);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
+        animator.SetBool("isGrounded", isGrounded);
     }
 
     private void Gravity()
@@ -170,9 +183,15 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            Debug.Log("Dash");
             var dashVector = transform.position + (dashTarget.right * dashValue);
+            mainCamera.transform.DOShakePosition(
+                duration: duration,
+                strength: strength,
+                vibrato: vibrato,
+                randomness: randomness);
+
             transform.DOMove(dashVector, dashTime);
+
             waveMaterial.SetFloat("_WaveSpeed", 10f);
             waveMaterial.SetFloat("_WaveIntensity", 0.2f);
             waveMaterial.SetFloat("_WaveRate", 10f);
@@ -186,6 +205,7 @@ public class CharacterController : MonoBehaviour
         {
             isJumping = false;
         }
+
         playerState = PlayerStates.Walking;
         transform.DOKill(true);
         if (playerState == PlayerStates.Wave)
@@ -206,6 +226,11 @@ public class CharacterController : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         playerState = PlayerStates.Walking;
         transform.localScale = new Vector3(1, 1, 1);
+        ResetWaveMaterial();
+    }
+
+    private void ResetWaveMaterial()
+    {
         waveMaterial.SetFloat("_WaveSpeed", 5);
         waveMaterial.SetFloat("_WaveIntensity", 0.01f);
         waveMaterial.SetFloat("_WaveRate", 4f);
@@ -214,11 +239,11 @@ public class CharacterController : MonoBehaviour
     private void Death()
     {
         playerState = PlayerStates.Dead;
-        playerAnimator.SetTrigger("Death");
+        animator.SetTrigger("Death");
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(groundCheck.position,0.2f);
+        Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
     }
 }

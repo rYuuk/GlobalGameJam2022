@@ -18,7 +18,6 @@ public class Medium : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        player.playerState = CharacterController.PlayerStates.Wave;
         player.EnableDash(dashTarget, dashValue, dashTime);
     }
 

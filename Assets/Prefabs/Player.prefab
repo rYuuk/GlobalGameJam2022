@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d48d3fb339bee4896bed57014a5dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 8766521073205557539}
   speed: 3
   rotationSpeed: 0.25
   jumpSpeed: 10
@@ -138,14 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 8080874176473527939}
-  rigidbody: {fileID: 8080874176370709751}
-  isGrounded: 0
-  playerState: 0
-  gravity: -9.8
-  waveGravity: -0.75
-  dashValue: 0
   waveMaterial: {fileID: 2100000, guid: 18c9030633fe27d4a9c9189aa45a8417, type: 2}
-  playerAnimator: {fileID: 8766521073205557539}
+  duration: 0.5
+  strength: 0.5
+  randomness: 90
+  vibrato: 10
+  playerState: 0
 --- !u!114 &8080874176370709753
 MonoBehaviour:
   m_ObjectHideFlags: 0

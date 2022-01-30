@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private int vibrato = 10;
     
     [Inject] private GameManager gameManager;
-    [Inject] private Camera camera;
+    [Inject] private Camera mainCamera;
     
     public int Id => id;
     
@@ -49,6 +49,6 @@ public class Checkpoint : MonoBehaviour
 
     private void Shake()
     {
-        camera.transform.DOShakePosition(duration:duration,strength: strength,vibrato:vibrato, randomness:randomness);
+        mainCamera.transform.DOShakePosition(duration:duration,strength: strength,vibrato:vibrato, randomness:randomness);
     }
 }
