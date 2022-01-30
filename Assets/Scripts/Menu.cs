@@ -29,6 +29,7 @@ public class Menu : MonoBehaviour
         resumeButton.onClick.AddListener(Resume);
         backToMenuButton.onClick.AddListener(BackToMenu);
         gameManager.Paused += Pause;
+        gameManager.Resumed += Resume;
     }
 
     private void OnDisable()
@@ -38,6 +39,7 @@ public class Menu : MonoBehaviour
         creditButton.onClick.RemoveListener(Credit);
         quitButton.onClick.RemoveListener(Quit);
         gameManager.Paused -= Pause;
+        gameManager.Resumed -= Resume;
     }
 
     private void Pause()

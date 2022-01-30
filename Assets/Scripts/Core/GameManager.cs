@@ -17,22 +17,11 @@ public class GameManager : MonoBehaviour
         Finish
     }
 
-    public Action Running;
     public Action Paused;
     public Action Finished;
+    public Action Resumed;
 
     public State state;
-
-    public void Continue()
-    {
-        MovePlayerToLastCheckpoint();
-    }
-
-    public void StartGame()
-    {
-        state = State.Running;
-        Running?.Invoke();
-    }
 
     public void Finish()
     {
@@ -83,15 +72,30 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) )
         {
-            Pause();
-        }
+            if (state == State.Running)
+            {
+                Pause();    
+            }
+            else
+            {
+                Resume();
+            }
+        } 
     }
 
+    private void Resume()
+    {
+        state = State.Running;
+        Time.timeScale = 1f;
+        Resumed?.Invoke();
+    }
+    
     private void Pause()
     {
         state = State.Pause;
+        Time.timeScale = 0f;
         Paused?.Invoke();
     }
 }
