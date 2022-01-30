@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         playerLight = GetComponent<PlayerLight>();
         playerState = PlayerStates.Walking;
 
-        ResetWaveMaterial();
+        SetWaveMaterialProperties();
     }
 
     private void OnEnable()
@@ -192,9 +192,7 @@ public class Player : MonoBehaviour
 
             transform.DOMove(dashVector, dashTime);
 
-            waveMaterial.SetFloat("_WaveSpeed", 10f);
-            waveMaterial.SetFloat("_WaveIntensity", 0.2f);
-            waveMaterial.SetFloat("_WaveRate", 10f);
+            SetWaveMaterialProperties(10f, 0.2f, 10f);
             StartCoroutine(DashReset());
         }
     }
@@ -226,14 +224,14 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         playerState = PlayerStates.Walking;
         transform.localScale = new Vector3(1, 1, 1);
-        ResetWaveMaterial();
+        SetWaveMaterialProperties();
     }
 
-    private void ResetWaveMaterial()
+    private void SetWaveMaterialProperties(float waveSpeed = 5, float intensity = 0.01f, float rate = 4f)
     {
-        waveMaterial.SetFloat("_WaveSpeed", 5);
-        waveMaterial.SetFloat("_WaveIntensity", 0.01f);
-        waveMaterial.SetFloat("_WaveRate", 4f);
+        waveMaterial.SetFloat("_WaveSpeed", waveSpeed);
+        waveMaterial.SetFloat("_WaveIntensity", intensity);
+        waveMaterial.SetFloat("_WaveRate", rate);
     }
 
     private void Death()

@@ -1,6 +1,7 @@
 using System.Linq;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Rendering;
 using VContainer;
 using VContainer.Unity;
 
@@ -18,5 +19,6 @@ public class GameplayLifetimeScope : LifetimeScope
         builder.RegisterInstance(FindObjectsOfType<Checkpoint>());
         builder.RegisterInstance(FindObjectsOfType<MonoBehaviour>().OfType<IResetable>().ToArray());
         builder.RegisterInstance(Camera.main);
+        builder.RegisterInstance(FindObjectOfType<Volume>());
     }
 }
