@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float randomness = 90f;
     [SerializeField] private int vibrato = 10;
 
+    [SerializeField] private AudioSource audioSource;
+
     [Inject] private Camera mainCamera;
 
     public PlayerStates playerState;
@@ -191,6 +193,8 @@ public class Player : MonoBehaviour
                 randomness: randomness);
 
             transform.DOMove(dashVector, dashTime);
+            
+            audioSource.Play();
 
             SetWaveMaterialProperties(10f, 0.2f, 10f);
             StartCoroutine(DashReset());
