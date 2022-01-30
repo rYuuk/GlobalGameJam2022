@@ -196,7 +196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3750094776241792492, guid: 28c49132f09303848bfa36b5da03632a, type: 3}
       propertyPath: id
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3750094776241792494, guid: 28c49132f09303848bfa36b5da03632a, type: 3}
       propertyPath: m_RootOrder
@@ -263,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 3750094776241792491, guid: 28c49132f09303848bfa36b5da03632a, type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3750094776241792492, guid: 28c49132f09303848bfa36b5da03632a, type: 3}
+      propertyPath: id
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3750094776241792494, guid: 28c49132f09303848bfa36b5da03632a, type: 3}
       propertyPath: m_RootOrder
