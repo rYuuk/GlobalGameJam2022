@@ -44,6 +44,7 @@ public class ReflectionPointController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        player.transform.DOKill();
         player.transform.DOMove(attachPoint[positionIndex].transform.position, 0.3f);
         player.playerState = Player.PlayerStates.Reflecting;
         isHoldingPlayer = true;
