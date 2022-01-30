@@ -4,7 +4,7 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(Animator), typeof(PlayerLight))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IResetable
 {
     public enum PlayerStates
     {
@@ -254,5 +254,10 @@ public class Player : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
+    }
+
+    public void ResetState()
+    {
+        playerState = PlayerStates.Walking;
     }
 }

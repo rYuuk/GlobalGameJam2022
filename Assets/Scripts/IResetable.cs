@@ -1,7 +1,4 @@
-﻿namespace DefaultNamespace
+﻿public interface IResetable
 {
-    public interface IResetable
-    {
-        void ResetState();
-    }
+    void ResetState();
 }
