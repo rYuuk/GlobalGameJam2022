@@ -19,6 +19,9 @@ public class Goal : MonoBehaviour
     [Inject] private Player player;
     [Inject] private Camera mainCamera;
 
+    public bool IsPlayerMoved => isPlayerMoved;
+    private bool isPlayerMoved = false;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -39,5 +42,7 @@ public class Goal : MonoBehaviour
         mainCamera.transform.DOShakeRotation(duration, strength, vibrato, randomness);
         yield return new WaitForSeconds(3f);
         player.transform.position = nextLevelStartPosition.position;
+        yield return new WaitForSeconds(1f);
+        isPlayerMoved = true;
     }
 }
