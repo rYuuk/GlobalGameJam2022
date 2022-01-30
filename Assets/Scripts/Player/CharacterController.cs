@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class CharacterController : MonoBehaviour
     [Header("Animation")] [SerializeField] private Animator playerAnimator;
 
     private PlayerLight playerLight;
+    private bool isJumping = false;
+
 
     private void Awake()
     {
@@ -57,10 +60,10 @@ public class CharacterController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         GroundCheck();
-        float h = Input.GetAxis("Horizontal");
+        var h = Input.GetAxis("Horizontal");
         playerAnimator.SetFloat("speed", h);
         switch (playerState)
         {
@@ -81,7 +84,8 @@ public class CharacterController : MonoBehaviour
                 break;
             case PlayerStates.Dead:
                 break;
-                ;
+            case PlayerStates.Dashing:
+                break;
         }
     }
 
@@ -113,11 +117,14 @@ public class CharacterController : MonoBehaviour
 
     private void Jump() //Called from Animation Event 
     {
-        if ((Input.GetButton("Jump") && isGrounded))
+        if ((Input.GetButton("Jump")))
         {
-            playerAnimator.SetTrigger("jump");
-            CancelInvoke(nameof(ActualJump));
-            Invoke(nameof(ActualJump), 0.2f);
+            if (isGrounded && !isJumping)
+            {
+                isJumping = true;
+                playerAnimator.SetTrigger("jump");
+                Invoke(nameof(ActualJump), 0.02f);
+            }
         }
     }
 
@@ -151,18 +158,27 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetButton("Jump") && isDashEnabled)
         {
-            var dashVector = transform.position + (dashTarget.right *  dashValue);
+            var dashVector = transform.position + (dashTarget.right * dashValue);
             transform.DOMove(dashVector, 0.5f);
-            waveMaterial.SetFloat("_WaveSpeed",10f);
-            waveMaterial.SetFloat("_WaveIntensity",0.2f);
-            waveMaterial.SetFloat("_WaveRate",10f);
+            waveMaterial.SetFloat("_WaveSpeed", 10f);
+            waveMaterial.SetFloat("_WaveIntensity", 0.2f);
+            waveMaterial.SetFloat("_WaveRate", 10f);
             StartCoroutine(DashReset());
         }
     }
 
-    private void OnCollisionEnter(Collision _)
+    private void OnCollisionEnter(Collision col)
     {
+        if (IsInLayerMask(col.gameObject, ground))
+        {
+            isJumping = false;
+        }
         playerState = PlayerStates.Walking;
+    }
+    
+    public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+    {
+        return ((layerMask.value & (1 << obj.layer)) > 0);
     }
 
     private IEnumerator DashReset()
@@ -171,9 +187,9 @@ public class CharacterController : MonoBehaviour
         isDashEnabled = false;
         playerState = PlayerStates.Walking;
         transform.localScale = new Vector3(1, 1, 1);
-        waveMaterial.SetFloat("_WaveSpeed",5);
-        waveMaterial.SetFloat("_WaveIntensity",0.01f);
-        waveMaterial.SetFloat("_WaveRate",4f);
+        waveMaterial.SetFloat("_WaveSpeed", 5);
+        waveMaterial.SetFloat("_WaveIntensity", 0.01f);
+        waveMaterial.SetFloat("_WaveRate", 4f);
     }
 
     private void Death()
