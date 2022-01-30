@@ -35,9 +35,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaveIntensity: 0.043
-    - _WaveRate: 20
-    - _WaveSpeed: 2
+    - _WaveIntensity: 0.041
+    - _WaveRate: 25.4
+    - _WaveSpeed: 20.3
     m_Colors:
     - _BaseColor: {r: 0.9716981, g: 0.9671146, b: 0.9671146, a: 0}
     - _EmissionColor: {r: 0.35733482, g: 1.796078, b: 1.4204276, a: 0}
