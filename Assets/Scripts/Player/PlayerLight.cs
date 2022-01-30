@@ -3,6 +3,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using VContainer;
 
 public class PlayerLight : MonoBehaviour, IResetable
 {
@@ -11,21 +12,23 @@ public class PlayerLight : MonoBehaviour, IResetable
     [SerializeField] private Light characterHalo;
     [SerializeField] private float defaultConsumptionRate;
 
-    public Action LightConsumed;
-    public float CurrentLightUnits => currentLightUnits;
+    [Inject] private Volume volume;
 
-    [SerializeField] private Vignette cameraVignette;
-    [SerializeField] VolumeProfile volumeProfile;
-    
+    public Action LightConsumed;
+
+    private Vignette cameraVignette;
+    private VolumeProfile volumeProfile;
     private float consumptionRate;
     private bool isLightConsumed;
-
 
     private void Awake()
     {
         ResetConsumptionRate();
-        volumeProfile = FindObjectOfType<Volume>()?.profile;
-        if (!volumeProfile.TryGet(out cameraVignette)) throw new NullReferenceException(nameof(cameraVignette));
+        volumeProfile = volume.profile;
+        if (volumeProfile != null && !volumeProfile.TryGet(out cameraVignette))
+        {
+            throw new NullReferenceException(nameof(cameraVignette));
+        }
     }
 
     public void SetConsumptionRate(float rate)
@@ -67,9 +70,6 @@ public class PlayerLight : MonoBehaviour, IResetable
 
     private float CalculateClampedValue()
     {
-        var clampedValue = 1 - (currentLightUnits/maxLightUnits);
-        return clampedValue;
+        return 1 - (currentLightUnits / maxLightUnits);
     }
-
-    public void ResetVignette() => cameraVignette.intensity.Override(0f); 
 }
